@@ -33,15 +33,15 @@ def contact():
 @app.route('/currencies')
 def currencies():
     parser = reqparse.RequestParser()
-        parser.add_argument('base',required=False)
-        args = parser.parse_args()
-        URL = 'https://api.fixer.io/latest'
+    parser.add_argument('base',required=False)
+    args = parser.parse_args()
+    URL = 'https://api.fixer.io/latest'
 
-        if args['base'] is None : parser.remove_argument('base')
-        elif args['base'] is not None : URL = 'https://api.fixer.io/latest?base='+args['base']
-        
-        r = requests.get(URL, headers=None, data=None, verify=False)
-        return (r.json())
+    if args['base'] is None : parser.remove_argument('base')
+    elif args['base'] is not None : URL = 'https://api.fixer.io/latest?base='+args['base']
+    
+    r = requests.get(URL, headers=None, data=None, verify=False)
+    return (r.json())
 
 @app.route('/about')
 def about():
