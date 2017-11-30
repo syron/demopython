@@ -1,11 +1,6 @@
 """
 Routes and views for the flask application.
 """
-from flask import Flask, request
-from flask_restful import Resource, Api
-from flask_restful import reqparse
-from flask import Response
-import requests
 from datetime import datetime
 from flask import render_template
 from FlaskWebProject1 import app
