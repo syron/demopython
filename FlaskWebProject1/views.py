@@ -1,7 +1,11 @@
 """
 Routes and views for the flask application.
 """
-
+from flask import Flask, request
+from flask_restful import Resource, Api
+from flask_restful import reqparse
+from flask import Response
+import requests
 from datetime import datetime
 from flask import render_template
 from FlaskWebProject1 import app
@@ -25,6 +29,19 @@ def contact():
         year=datetime.now().year,
         message='Your contact page.'
     )
+
+@app.route('/currencies')
+def currencies():
+    parser = reqparse.RequestParser()
+        parser.add_argument('base',required=False)
+        args = parser.parse_args()
+        URL = 'https://api.fixer.io/latest'
+
+        if args['base'] is None : parser.remove_argument('base')
+        elif args['base'] is not None : URL = 'https://api.fixer.io/latest?base='+args['base']
+        
+        r = requests.get(URL, headers=None, data=None, verify=False)
+        return (r.json())
 
 @app.route('/about')
 def about():
